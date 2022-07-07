@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import Wordle from "./components/Wordle"
 
 function App() {
   const [solution, setSolution] = useState(null)
 
   useEffect(() => {
-    fetch("http://localhost:3001/solutions")
+    fetch("http://localhost:8000/solutions")
     .then(response => response.json()) // this returns a promise, that's why there is another .then after this
     .then(json =>  {
         let randomNum = Math.floor(Math.random() * json.length)
@@ -17,7 +18,7 @@ function App() {
     <div className="App">
       <h1>Wordle (Lingo)</h1>
       {/* if solution is null, don't output the solution*/}
-      {solution && <div> Solution is {solution} </div>}
+      {solution && <Wordle solution={solution} />}
     </div>
   );
 }
