@@ -5,7 +5,10 @@ const Grid = (props) => {
     return (
         <div className="grid">
             {props.guesses.map( (guess, index) => {
-                return <Row key={index} guess={guess}/>
+                if (props.turn === index) {
+                    return <Row key={index} currentGuess={props.currentGuess} />
+                }
+                return <Row key={index} guess={guess} />
             })}
         </div>
     )
