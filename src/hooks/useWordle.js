@@ -18,12 +18,30 @@ const useWordle = (solution) => {
     // eg. [{key : 'a', color : 'yellow' }]
     const formatGuess = () => {
         // console.log('Formatting guess - ', currentGuess)
-        let solutionArray = [...solution]; // take solution string and spread it; making it an array of characters
+        let solutionArray = [...solution]; // take solution string and spread it; making it an array of characters (can also use split)
         
-        let formattedGuess = [...currentGuess].map( (letter) => {
+        let formattedGuess = currentGuess.split('').map( (letter) => {
             return {key : letter, color : 'grey'} // returns an array of objects [{key : 'a', color : 'yellow'}, {..}]
         });
         
+        //find green letters
+        formattedGuess.forEach((item, index) => {
+            if (solutionArray[index] === item.key) {
+                formattedGuess[index].color = 'green';
+                solutionArray[index] = null; // avoid double matching colors with the same letters in the future when checking for yellow letters
+                // since we're using .includes, letters in correct positions will also be considered, so set them to null to prevent this
+            }
+        })
+
+        // find yellow letters
+        formattedGuess.forEach((item, index) => {
+            if (solutionArray.includes(item.key) && item.color !== 'green') {
+                formattedGuess[index].color = 'yellow';
+                solutionArray[solutionArray.indexOf(item.key)] = null; // find where the letter is in the solution array
+            }
+        })
+
+        return formattedGuess;
         
     }
 
@@ -58,7 +76,8 @@ const useWordle = (solution) => {
                 return;
             }
 
-            formatGuess();
+            const formatted = formatGuess();
+            console.log(formatted)
 
         }
 
