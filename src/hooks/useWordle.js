@@ -14,6 +14,9 @@ const useWordle = (solution) => {
     // see if the user got the right answer
     const [isCorrect, setIsCorrect] = useState(false)
 
+    // only added to this object is the letter has been used
+    const [usedKeys, setUsedKeys] = useState({}) // {a:'green', b: 'yellow', c: 'green'}
+
     // format a guess into an array of letter objects
     // eg. [{key : 'a', color : 'yellow' }]
     const formatGuess = () => {
@@ -53,7 +56,7 @@ const useWordle = (solution) => {
         if (currentGuess === solution) {
             setIsCorrect(true);
         }
-        
+
         setGuesses( (prevGuesses) => {
             let newGuesses = [...prevGuesses];
             newGuesses[turn] = formattedGuess;
@@ -68,6 +71,29 @@ const useWordle = (solution) => {
             return prevTurn + 1;
         })
 
+        setUsedKeys( (prevUsedKeys) => {
+            let newKeys = {...prevUsedKeys}
+            formattedGuess.forEach( (letterObj, index) => {
+                const currentColor = newKeys[letterObj.key];
+
+                if (letterObj.color === 'green') {
+                    newKeys[letterObj.key] = 'green' // another way of referencing object's key
+                    return;
+                }
+
+                if (letterObj.color === 'yellow' && currentColor !== 'green') {
+                    newKeys[letterObj.key] = 'yellow'
+                    return;
+                }
+                
+                if (letterObj.color === 'grey' && currentColor !== 'green' && currentColor !== 'yellow') {
+                    newKeys[letterObj.key] = 'grey'
+                    return;
+                }
+            })
+
+            return newKeys; // after the neyKeys has been updated with the above if statements
+        })
         setCurrentGuess(''); // clear the current guess, so user can try again
     }
 
@@ -119,7 +145,7 @@ const useWordle = (solution) => {
   }
 }
 
-    return {turn, currentGuess, guesses, isCorrect, handleKeyup}
+    return {turn, currentGuess, guesses, isCorrect, handleKeyup, usedKeys }
 
 }
 

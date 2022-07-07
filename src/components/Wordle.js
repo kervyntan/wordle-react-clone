@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import useWordle from "../hooks/useWordle"
-import Grid from "./Grid"
+import useWordle from "../hooks/useWordle";
+import Grid from "./Grid";
+import Keypad from "./Keypad";
 
 const Wordle = ({solution}) => {
     // destructuring currentGuess and handleKeyup from the useWordle hook
-    const { currentGuess, handleKeyup, guesses, isCorrect, turn } = useWordle(solution);
+    const { currentGuess, handleKeyup, guesses, isCorrect, turn, usedKeys} = useWordle(solution);
 
     useEffect( () => {
         // call this function everytime a user types a letter
@@ -25,6 +26,7 @@ const Wordle = ({solution}) => {
         Current word is - {currentGuess}
         </p>
         <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
+        <Keypad usedKeys={usedKeys} />
     </div>
     )
 }
