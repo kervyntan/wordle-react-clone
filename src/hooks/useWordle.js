@@ -7,10 +7,10 @@ const useWordle = (solution) => {
     // state changes during handleKeyup trigger/when user types
     const [currentGuess, setCurrentGuess] = useState('')
     // add each formatted guess to this state (array of objects)
-    const [guesses, setGuesses] = useState([])
+    const [guesses, setGuesses] = useState([...Array(6)]) // default size is length 6; (6 rows of the grid)
     // store user's past guesses in the history array (array of strings)
     // to check against and make sure user doesn't make duplictaed guesses
-    const [history, setHistory] = useState(['ninja'])
+    const [history, setHistory] = useState([])
     // see if the user got the right answer
     const [isCorrect, setIsCorrect] = useState(false)
 
@@ -49,8 +49,26 @@ const useWordle = (solution) => {
     // update the isCorrect state if the guess is correct
     // add one to the turn state (next row/next guess for the user)
 
-    const addNewGuess = () => {
+    const addNewGuess = (formattedGuess) => {
+        if (currentGuess === solution) {
+            setIsCorrect(true);
+        }
+        
+        setGuesses( (prevGuesses) => {
+            let newGuesses = [...prevGuesses];
+            newGuesses[turn] = formattedGuess;
+            return newGuesses;
+        })
 
+        setHistory( (prevHistory) => {
+            return [...prevHistory, currentGuess];
+        })
+
+        setTurn( (prevTurn) => {
+            return prevTurn + 1;
+        })
+
+        setCurrentGuess(''); // clear the current guess, so user can try again
     }
 
     // handle keyup event & track current guess
@@ -77,7 +95,7 @@ const useWordle = (solution) => {
             }
 
             const formatted = formatGuess();
-            console.log(formatted)
+            addNewGuess(formatted);
 
         }
 

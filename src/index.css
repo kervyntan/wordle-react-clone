@@ -11,3 +11,35 @@ h1 {
   margin: 0 0 30px 0;
   color: #333;
 }
+
+.row {
+  text-align : center;
+  display : flex;
+  justify-content: center;
+}
+
+.row > div {
+  display : block;
+  width : 60px;
+  height : 60px;
+  border : 1px solid lightgray;
+  margin : 4px;
+  text-align : center;
+  line-height : 60px;
+  text-transform : uppercase; /* all letters uppercase */
+  font-weight : 700;
+  font-size : 2.5em;
+  color : black;
+}
+
+.green {
+  background : #5ac85a;
+}
+
+.yellow {
+  background : #e2cc68;
+}
+
+.grey {
+  background : #a1a1a1;
+}
