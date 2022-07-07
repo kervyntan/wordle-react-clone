@@ -16,7 +16,7 @@ function App() {
   }, [setSolution])
   return (
     <div className="App">
-      <h1>Wordle (Lingo)</h1>
+      <h1>Wordle Clone (React) </h1>
       {/* if solution is null, don't output the solution*/}
       {solution && <Wordle solution={solution} />}
     </div>

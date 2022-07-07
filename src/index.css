@@ -88,6 +88,24 @@ h1 {
   font-weight:  700;
 }
 
+.keypad > div.green {
+  background : #5ac85a;
+  color : white;
+  transition : all 0.3s ease-in;
+}
+
+.keypad > div.yellow {
+  background : #e2cc68;
+  color : white;
+  transition : all 0.3s ease-in;
+}
+
+.keypad > div.grey {
+  background : #a1a1a1;
+  color : white;
+  transition : all 0.3s ease-in;
+}
+
 @keyframes flip {
   0% {
     transform : rotateX(0);

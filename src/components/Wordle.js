@@ -11,6 +11,15 @@ const Wordle = ({solution}) => {
         // call this function everytime a user types a letter
         window.addEventListener('keyup', handleKeyup)
 
+
+        if (isCorrect) {
+            window.removeEventListener('keyup', handleKeyup); // when user gets the right answer, detach the event listener, game ends
+        }
+
+        if (turn > 5) {
+            window.removeEventListener('keyup', handleKeyup); // when user runs out of guesses, detach the event listener, game ends
+        }
+
         // run cleanup function to remove eventlistener after useEffect is done running
         return () => window.removeEventListener('keyup', handleKeyup)
     }, [handleKeyup])
