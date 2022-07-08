@@ -132,6 +132,16 @@ h1 {
   letter-spacing : 1px;
 }
 
+.btn-modal {
+  background: transparent;
+  border-radius: 10px;
+  padding-inline : 20px;
+  padding-block : 10px;
+  font-weight : 700;
+  border: 0.5px solid black;
+  box-shadow : 5px 8px 5px rgba(10, 10, 10, 0.8);
+}
+
 @keyframes flip {
   0% {
     transform : rotateX(0);

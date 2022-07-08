@@ -9,6 +9,10 @@ const Wordle = ({solution}) => {
     const { currentGuess, handleKeyup, guesses, isCorrect, turn, usedKeys} = useWordle(solution);
     const [showModal, setShowModal] = useState(false);
 
+    const onClickHandler = () => {
+        window.location.reload();
+    }
+
     useEffect( () => {
         // call this function everytime a user types a letter
         window.addEventListener('keyup', handleKeyup)
@@ -38,13 +42,13 @@ const Wordle = ({solution}) => {
 
     return (
     <div className="wordle">
-        solution - {solution}
+        {/* solution - {solution}
         <p>
         Current word is - {currentGuess}
-        </p>
+        </p> */}
         <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
         <Keypad usedKeys={usedKeys} />
-        {showModal && <Modal isCorrect={isCorrect} turn={turn} solution={solution} />}
+        {showModal && <Modal isCorrect={isCorrect} turn={turn} solution={solution} onClickHandler={onClickHandler} />}
     </div>
     )
 }
