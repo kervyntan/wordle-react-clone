@@ -14,6 +14,7 @@ function App() {
         setSolution(randomSolution.word);
     })
   }, [setSolution])
+  
   return (
     <div className="App">
       <h1>Wordle Clone (React) </h1>
