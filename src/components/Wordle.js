@@ -22,6 +22,9 @@ const Wordle = ({solution}) => {
         }
 
         if (turn > 5) {
+            setTimeout( () => {
+                setShowModal(true);
+            }, 2000)
             window.removeEventListener('keyup', handleKeyup); // when user runs out of guesses, detach the event listener, game ends
         }
 
